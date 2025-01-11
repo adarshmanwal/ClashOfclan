@@ -5,45 +5,73 @@ export default function SiegeMachine() {
   const [siegeQueue, setSiegeQueue] = useState([]);
 
   function addSiegeToQueue(siege) {
-    setSiegeQueue((prevQueue) => [...prevQueue, siege]);
+    const newSiege = { ...siege };
+    setSiegeQueue((prevQueue) => {
+      const lastSiege = prevQueue[prevQueue.length - 1];
+      if (lastSiege?.Name === newSiege.Name) {
+        const updatedLastSiege = {
+          ...lastSiege,
+          count: (lastSiege.count || 1) + 1,
+        };
+        return [...prevQueue.slice(0, -1), updatedLastSiege];
+      }
+      if (!newSiege.count) {
+        newSiege.count = 1;
+      }
+      return [...prevQueue, newSiege];
+    });
   }
 
-  function removeSiegeFromQueue(siege) {
-    setSiegeQueue((prevQueue) =>
-      prevQueue.filter((item) => item.Name !== siege.Name)
-    );
+  function removeSiegeFromQueue(index) {
+    setSiegeQueue((prevQueue) => {
+      const removeSiege = prevQueue[index];
+      if (removeSiege.count > 1) {
+        const updatedSiege = {
+          ...removeSiege,
+          count: removeSiege.count - 1,
+        };
+        return [
+          ...prevQueue.slice(0, index),
+          updatedSiege,
+          ...prevQueue.slice(index + 1),
+        ];
+      } else {
+        return [...prevQueue.slice(0, index), ...prevQueue.slice(index + 1)];
+      }
+    });
   }
 
   return (
-    <div className="flex flex-col justify-center items-center ">
+    <div className="flex flex-col justify-center items-center">
       {/* Capacity Section */}
       <div className="bg-white w-[100%] m-1 p-2">
-        <p className="text-lg font-semibold">Capacity: {siegeQueue.length}/100</p>
+        <p className="text-lg font-semibold">
+          Capacity: {siegeQueue.length}/100
+        </p>
       </div>
 
       {/* Siege Queue */}
-      <div className="bg-gray-200 rounded-lg w-[90%] h-[80px] m-1 flex justify-center items-center">
-        {siegeQueue
-          .slice()
-          .reverse()
-          .map((siege, index) => (
-            <div
-              key={index}
-              className="bg-gray-100 rounded-lg p-2 flex items-center shadow-md hover:shadow-lg transition cursor-pointer"
-              onClick={() => removeSiegeFromQueue(siege)}
-            >
-              <img
-                src={siege.Image}
-                alt={siege.Name}
-                className="w-10 h-10 mr-2"
-              />
-              <p className="text-sm font-semibold">{siege.Name}</p>
-            </div>
-          ))}
+      <div className="bg-gray-200 rounded-lg w-[100%] h-[80px] m-1 flex justify-start items-center">
+        {siegeQueue.map((siege, index) => (
+          <div
+            key={index}
+            className="bg-gray-100 rounded-lg p-2 flex items-center shadow-md hover:shadow-lg transition cursor-pointer"
+            onClick={() => removeSiegeFromQueue(index)}
+          >
+            <img
+              src={siege.Image}
+              alt={siege.Name}
+              className="w-10 h-10 mr-2"
+            />
+            <p className="text-sm font-semibold">
+              {siege.Name} (x{siege.count})
+            </p>
+          </div>
+        ))}
       </div>
 
       {/* Button Section */}
-      <div className="bg-white w-[100%] h-[25%] m-1 flex justify-end ">
+      <div className="bg-white w-[100%] h-[25%] m-1 flex justify-end">
         <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">
           Delete
         </button>
