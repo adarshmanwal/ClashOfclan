@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { TroopsData } from "../troopsData";
 import Troop from "./Troop";
 
@@ -43,6 +43,23 @@ export default function TrainArmy() {
     });
   };
 
+  const handleTroopProgressChange = useCallback(
+    function handleTroopProgressChange() {
+      console.log("handleTroopProgressChange");
+      setTrainingArmy((prevState) => {
+        const updatedArmy = prevState.slice(1); // Remove the first element
+        console.log(updatedArmy); // Log the updated array
+        return updatedArmy;
+      });
+    },
+    []
+  );
+
+  const handleTroopChange = useCallback(() => {
+    console.log("handleTroopChange");
+    handleTroopProgressChange();
+  }, [handleTroopProgressChange]);
+
   return (
     <div className="flex flex-col justify-center items-center">
       {/* Capacity Section */}
@@ -61,6 +78,7 @@ export default function TrainArmy() {
             index={index}
             handleTroopOnClick={() => removeTroopFromQueue(index)}
             troopQueue
+            handleTroopProgressChange={handleTroopChange}
           />
         ))}
       </div>

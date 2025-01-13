@@ -3,22 +3,26 @@ import { SiegeMachinesData } from "../siegeData";
 
 export default function SiegeMachine() {
   const [siegeQueue, setSiegeQueue] = useState([]);
+  const capacityLimit = 100;
+  const currentCapacity = siegeQueue.reduce(
+    (total, siege) => total + (siege.count * siege.HousingSpace || 1),
+    0
+  );
 
   function addSiegeToQueue(siege) {
-    const newSiege = { ...siege };
     setSiegeQueue((prevQueue) => {
       const lastSiege = prevQueue[prevQueue.length - 1];
-      if (lastSiege?.Name === newSiege.Name) {
+      if (lastSiege?.Name === siege.Name) {
         const updatedLastSiege = {
           ...lastSiege,
           count: (lastSiege.count || 1) + 1,
         };
         return [...prevQueue.slice(0, -1), updatedLastSiege];
       }
-      if (!newSiege.count) {
-        newSiege.count = 1;
+      if (!siege.count) {
+        siege.count = 1;
       }
-      return [...prevQueue, newSiege];
+      return [...prevQueue, siege];
     });
   }
 
@@ -44,12 +48,11 @@ export default function SiegeMachine() {
   return (
     <div className="flex flex-col justify-center items-center">
       {/* Capacity Section */}
-      <div className="bg-white w-[100%] m-1 p-2">
+      <div className="bg-white w-full">
         <p className="text-lg font-semibold">
-          Capacity: {siegeQueue.length}/100
+          Capacity: {currentCapacity}/{capacityLimit}
         </p>
       </div>
-
       {/* Siege Queue */}
       <div className="bg-gray-200 rounded-lg w-[100%] h-[80px] m-1 flex justify-start items-center">
         {siegeQueue.map((siege, index) => (

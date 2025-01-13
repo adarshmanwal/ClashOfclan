@@ -21,6 +21,7 @@ export const TroopsData = [
     Level: 1,
     HousingSpace: 1,
     TrainingTime: "20s",
+    TrainingTimeMilliseconds: 2000,
   },
   {
     Name: "Archer",
@@ -29,6 +30,7 @@ export const TroopsData = [
     Level: 1,
     HousingSpace: 1,
     TrainingTime: "25s",
+    TrainingTimeMilliseconds: 10000,
   },
   {
     Name: "Goblin",
@@ -37,6 +39,7 @@ export const TroopsData = [
     Level: 1,
     HousingSpace: 1,
     TrainingTime: "30s",
+    TrainingTimeMilliseconds: 30000,
   },
   {
     Name: "Giant",
@@ -45,6 +48,7 @@ export const TroopsData = [
     Level: 1,
     HousingSpace: 5,
     TrainingTime: "2m",
+    TrainingTimeMilliseconds: 120000,
   },
   {
     Name: "Wall Breaker",
@@ -53,6 +57,7 @@ export const TroopsData = [
     Level: 1,
     HousingSpace: 2,
     TrainingTime: "45s",
+    TrainingTimeMilliseconds: 45000,
   },
   {
     Name: "Balloon",
@@ -61,6 +66,7 @@ export const TroopsData = [
     Level: 1,
     HousingSpace: 5,
     TrainingTime: "3m",
+    TrainingTimeMilliseconds: 180000,
   },
   {
     Name: "Wizard",
@@ -69,6 +75,7 @@ export const TroopsData = [
     Level: 1,
     HousingSpace: 4,
     TrainingTime: "2m 30s",
+    TrainingTimeMilliseconds: 150000,
   },
   {
     Name: "Healer",
@@ -77,6 +84,7 @@ export const TroopsData = [
     Level: 1,
     HousingSpace: 6,
     TrainingTime: "4m",
+    TrainingTimeMilliseconds: 240000,
   },
   {
     Name: "Dragon",
@@ -85,6 +93,7 @@ export const TroopsData = [
     Level: 1,
     HousingSpace: 8,
     TrainingTime: "5m",
+    TrainingTimeMilliseconds: 300000,
   },
   {
     Name: "P.E.K.K.A",
@@ -93,6 +102,7 @@ export const TroopsData = [
     Level: 1,
     HousingSpace: 8,
     TrainingTime: "5m",
+    TrainingTimeMilliseconds: 300000,
   },
   {
     Name: "Baby Dragon",
@@ -101,6 +111,7 @@ export const TroopsData = [
     Level: 1,
     HousingSpace: 6,
     TrainingTime: "4m",
+    TrainingTimeMilliseconds: 240000,
   },
   {
     Name: "Miner",
@@ -109,6 +120,7 @@ export const TroopsData = [
     Level: 1,
     HousingSpace: 5,
     TrainingTime: "3m",
+    TrainingTimeMilliseconds: 180000,
   },
   {
     Name: "Hog Rider",
@@ -117,6 +129,7 @@ export const TroopsData = [
     Level: 1,
     HousingSpace: 5,
     TrainingTime: "3m",
+    TrainingTimeMilliseconds: 180000,
   },
   {
     Name: "Golem",
@@ -125,5 +138,6 @@ export const TroopsData = [
     Level: 1,
     HousingSpace: 8,
     TrainingTime: "5m",
+    TrainingTimeMilliseconds: 300000,
   },
 ];
