@@ -6,7 +6,7 @@ export default function Troop({
   index,
   handleTroopOnClick,
   troopQueue,
-  handleTroopProgressChange
+  handleTroopProgressChange,
 }) {
   if(troopQueue){
     console.log('first',index)

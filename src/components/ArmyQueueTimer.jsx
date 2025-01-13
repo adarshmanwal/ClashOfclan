@@ -2,17 +2,23 @@ import React, { useEffect, useState } from "react";
 
 export default function ArmyQueueTimer({ timeOut, onTimeOut }) {
   const [remainingTime, setRemainingTime] = useState(timeOut);
-
+  console.log("timeOut", timeOut);
+  console.log("remainingTime", remainingTime);
   useEffect(() => {
+    console.log("onTimeOut");
     setRemainingTime(timeOut);
 
-    const timer = setTimeout(onTimeOut, timeOut);
+    const timer = setTimeout(() => {
+      onTimeOut();
+      setRemainingTime(timeOut);
+    }, timeOut);
     return () => {
       clearTimeout(timer);
     };
-  }, [timeOut, onTimeOut]);
+  }, [timeOut]);
 
   useEffect(() => {
+    console.log("setInterval");
     const interval = setInterval(() => {
       setRemainingTime(
         (prevRemainingTime) => Math.max(prevRemainingTime - 100, 0) // Ensure it doesn't go below 0

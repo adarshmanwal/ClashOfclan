@@ -1,64 +1,15 @@
-import React, { useState, useCallback } from "react";
-import { TroopsData } from "../troopsData";
+import React, { useContext } from "react";
 import Troop from "./Troop";
+import { TroopCTX } from "../store/troops-context";
 
 export default function TrainArmy() {
-  const [trainingArmy, setTrainingArmy] = useState([]);
+  const troopsData = useContext(TroopCTX);
 
   const capacityLimit = 100;
-  const currentCapacity = trainingArmy.reduce(
+  const currentCapacity = troopsData.trainingArmy.reduce(
     (total, troop) => total + (troop.count * troop.HousingSpace || 1),
     0
   );
-
-  const addTroopToQueue = (troop) => {
-    setTrainingArmy((prevTroops) => {
-      const lastTroop = prevTroops[prevTroops.length - 1];
-      if (lastTroop?.Name === troop.Name) {
-        const updatedLastTroop = {
-          ...lastTroop,
-          count: (lastTroop.count || 1) + 1,
-        };
-        return [...prevTroops.slice(0, -1), updatedLastTroop];
-      }
-      return [...prevTroops, { ...troop, count: 1 }];
-    });
-  };
-
-  const removeTroopFromQueue = (index) => {
-    setTrainingArmy((prevTroops) => {
-      const troopToRemove = prevTroops[index];
-      if (troopToRemove.count > 1) {
-        const updatedTroop = {
-          ...troopToRemove,
-          count: troopToRemove.count - 1,
-        };
-        return [
-          ...prevTroops.slice(0, index),
-          updatedTroop,
-          ...prevTroops.slice(index + 1),
-        ];
-      }
-      return [...prevTroops.slice(0, index), ...prevTroops.slice(index + 1)];
-    });
-  };
-
-  const handleTroopProgressChange = useCallback(
-    function handleTroopProgressChange() {
-      console.log("handleTroopProgressChange");
-      setTrainingArmy((prevState) => {
-        const updatedArmy = prevState.slice(1); // Remove the first element
-        console.log(updatedArmy); // Log the updated array
-        return updatedArmy;
-      });
-    },
-    []
-  );
-
-  const handleTroopChange = useCallback(() => {
-    console.log("handleTroopChange");
-    handleTroopProgressChange();
-  }, [handleTroopProgressChange]);
 
   return (
     <div className="flex flex-col justify-center items-center">
@@ -71,14 +22,14 @@ export default function TrainArmy() {
 
       {/* Army Queue Section */}
       <div className="bg-gray-200 rounded-lg w-full h-full m-1 flex justify-start items-center overflow-x-auto">
-        {trainingArmy.map((troop, index) => (
+        {troopsData.trainingArmy.map((troop, index) => (
           <Troop
             troop={troop}
             key={index}
             index={index}
-            handleTroopOnClick={() => removeTroopFromQueue(index)}
+            handleTroopOnClick={() => troopsData.removeTroopFromQueue(index)}
             troopQueue
-            handleTroopProgressChange={handleTroopChange}
+            handleTroopProgressChange={troopsData.handleTroopChange}
           />
         ))}
       </div>
@@ -91,12 +42,12 @@ export default function TrainArmy() {
 
       {/* Troop Selection Section */}
       <div className="bg-gray-200 rounded-lg w-full h-48 m-1 grid grid-cols-8 gap-2 p-2 overflow-y-auto">
-        {TroopsData.map((troop, index) => (
+        {troopsData.armyList.map((troop, index) => (
           <Troop
             troop={troop}
             key={index}
             index={index}
-            handleTroopOnClick={() => addTroopToQueue(troop)}
+            handleTroopOnClick={() => troopsData.addTroopToQueue(troop)}
           />
         ))}
       </div>
