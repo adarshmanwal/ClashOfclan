@@ -6,6 +6,7 @@ export default function Troop({
   index,
   handleTroopOnClick,
   troopQueue,
+  trainedQueue
 }) {
   if(troopQueue){
     console.log('first',index)
@@ -19,14 +20,14 @@ export default function Troop({
           alt={`Army ${index + 1}`}
           className="w-16 h-16 mb-2"
         />
-        {troopQueue ? (
+        {troopQueue || trainedQueue ? (
           <p className="text-sm font-semibold">
             {troop.Name} (x{troop.count})
           </p>
         ) : (
           <p className="text-sm font-semibold">{troop.Name}</p>
         )}
-        {troopQueue && index == 0 && (
+        {troopQueue && !trainedQueue && index == 0 && (
           <ArmyQueueTimer
             key={index}
             timeOut={troop.TrainingTimeMilliseconds}

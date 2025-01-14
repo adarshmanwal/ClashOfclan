@@ -1,7 +1,10 @@
-import React from "react";
-import { TroopsData } from "../troopsData";
+import React, { useContext } from "react";
+import { TroopCTX } from "../store/troops-context";
+import Troop from "./Troop";
 
 export default function Army() {
+  const troopsData = useContext(TroopCTX);
+  console.log("trained list", troopsData.trainedTroopsList);
   return (
     <>
       <div className="flex flex-col justify-center ">
@@ -11,9 +14,23 @@ export default function Army() {
         </div>
         {/* SPELL QUEUE */}
         <div className="flex">
-          <div className="bg-gray-200 flex-none w-[80%] rounded-lg h-[80px] m-1 flex justify-center items-center">
-            <p className="text-lg font-semibold ">Your current army</p>
+          <div className="bg-gray-200 flex-none w-[80%] rounded-lg h-[115px] m-1 flex justify-start items-center ">
+            <div className=" w-full h-full items-center overflow-x-auto">
+              {troopsData.trainedTroopsList.map((troop, index) => (
+                <Troop
+                  troop={troop}
+                  key={index}
+                  index={index}
+                  trainedQueue={true}
+                  troopQueue={true}
+                  handleTroopOnClick={() =>
+                    troopsData.removeTrainedArmyList(index)
+                  }
+                />
+              ))}
+            </div>
           </div>
+
           <div className="bg-gray-200 flex-1 w-1 rounded-lg h-[80px] m-1 flex justify-center items-center">
             <p className="text-lg font-semibold">Your current army</p>
           </div>
