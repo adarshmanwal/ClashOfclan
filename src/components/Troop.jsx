@@ -6,7 +6,6 @@ export default function Troop({
   index,
   handleTroopOnClick,
   troopQueue,
-  handleTroopProgressChange,
 }) {
   if(troopQueue){
     console.log('first',index)
@@ -31,7 +30,7 @@ export default function Troop({
           <ArmyQueueTimer
             key={index}
             timeOut={troop.TrainingTimeMilliseconds}
-            onTimeOut={handleTroopProgressChange}
+            troopCount = {troop.count}
           ></ArmyQueueTimer>
         )}
       </div>

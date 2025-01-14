@@ -29,7 +29,6 @@ export default function TrainArmy() {
             index={index}
             handleTroopOnClick={() => troopsData.removeTroopFromQueue(index)}
             troopQueue
-            handleTroopProgressChange={troopsData.handleTroopChange}
           />
         ))}
       </div>

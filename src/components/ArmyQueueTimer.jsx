@@ -1,21 +1,19 @@
-import React, { useEffect, useState } from "react";
-
-export default function ArmyQueueTimer({ timeOut, onTimeOut }) {
+import React, { useContext, useEffect, useState } from "react";
+import { TroopCTX } from "../store/troops-context";
+export default function ArmyQueueTimer({ timeOut ,troopCount}) {
   const [remainingTime, setRemainingTime] = useState(timeOut);
-  console.log("timeOut", timeOut);
-  console.log("remainingTime", remainingTime);
+  const troopCTX = useContext(TroopCTX)
   useEffect(() => {
     console.log("onTimeOut");
     setRemainingTime(timeOut);
 
     const timer = setTimeout(() => {
-      onTimeOut();
-      setRemainingTime(timeOut);
+      troopCTX.handleTroopChange()
     }, timeOut);
     return () => {
       clearTimeout(timer);
     };
-  }, [timeOut]);
+  }, [timeOut,troopCount]);
 
   useEffect(() => {
     console.log("setInterval");
