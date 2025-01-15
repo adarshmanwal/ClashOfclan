@@ -11,7 +11,7 @@ export default function App() {
   return (
     <TroopsContextProvider>
       <div className="bg-gray-100 flex items-center justify-center min-h-screen">
-        <div className="bg-white shadow-lg rounded-lg w-[75%] h-[500px] flex flex-col p-6">
+        <div className="bg-white shadow-lg rounded-lg w-[75%] h-[550px] flex flex-col p-6">
           {/* Tabs */}
           <div className="flex justify-between border-b  border-gray-200 mb-6">
             {[

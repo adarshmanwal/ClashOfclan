@@ -12,6 +12,8 @@ export const SpellsData = [
     Type: "Damage",
     HousingSpace: 1,
     TrainingTime: "6m",
+    TrainingTimeMilliseconds: 3000, // 6 minutes in milliseconds
+    Level: 1, // You can add level if applicable
   },
   {
     Name: "Healing Spell",
@@ -19,6 +21,8 @@ export const SpellsData = [
     Type: "Healing",
     HousingSpace: 2,
     TrainingTime: "6m",
+    TrainingTimeMilliseconds: 360000, // 6 minutes in milliseconds
+    Level: 1, // You can add level if applicable
   },
   {
     Name: "Rage Spell",
@@ -26,6 +30,8 @@ export const SpellsData = [
     Type: "Boost",
     HousingSpace: 2,
     TrainingTime: "6m",
+    TrainingTimeMilliseconds: 360000, // 6 minutes in milliseconds
+    Level: 1, // You can add level if applicable
   },
   {
     Name: "Jump Spell",
@@ -33,6 +39,8 @@ export const SpellsData = [
     Type: "Support",
     HousingSpace: 2,
     TrainingTime: "6m",
+    TrainingTimeMilliseconds: 360000, // 6 minutes in milliseconds
+    Level: 1, // You can add level if applicable
   },
   {
     Name: "Freeze Spell",
@@ -40,6 +48,8 @@ export const SpellsData = [
     Type: "Control",
     HousingSpace: 1,
     TrainingTime: "3m",
+    TrainingTimeMilliseconds: 180000, // 3 minutes in milliseconds
+    Level: 1, // You can add level if applicable
   },
   {
     Name: "Clone Spell",
@@ -47,5 +57,7 @@ export const SpellsData = [
     Type: "Summon",
     HousingSpace: 4,
     TrainingTime: "6m",
+    TrainingTimeMilliseconds: 360000, // 6 minutes in milliseconds
+    Level: 1, // You can add level if applicable
   },
 ];

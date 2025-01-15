@@ -1,10 +1,13 @@
 import React, { useContext } from "react";
 import { TroopCTX } from "../store/troops-context";
+import { SpellCTX } from "../store/spell-context";
 import Troop from "./Troop";
+import Spell from "./Spell";
 
 export default function Army() {
   const troopsData = useContext(TroopCTX);
-  console.log("trained list", troopsData.trainedTroopsList);
+  const spellData = useContext(SpellCTX);
+  console.log("trained spell list", spellData.trainedSpellsList);
   return (
     <>
       <div className="flex flex-col justify-center ">
@@ -43,8 +46,21 @@ export default function Army() {
         </div>
         {/* SPELL QUEUE */}
         <div className="flex">
-          <div className="bg-gray-200 flex-none w-[70%] rounded-lg h-[80px] m-1 flex justify-center items-center">
-            <p className="text-lg font-semibold ">Your current army</p>
+          <div className="bg-gray-200 flex-none w-[70%] rounded-lg h-[115px] m-1 flex justify-center items-center">
+          <div className=" w-full h-full items-center overflow-x-auto">
+              {spellData.trainedSpellsList.map((spell, index) => (
+                <Spell
+                  spell={spell}
+                  key={index}
+                  index={index}
+                  spellQueue={true}
+                  brewedQueue={true}
+                  handleSpellOnClick={() =>
+                    spellData.removeTrainedSpellsList(index)
+                  }
+                />
+              ))}
+            </div>
           </div>
           <div className="bg-gray-200 flex-1 w-1 rounded-lg h-[80px] m-1 flex justify-center items-center">
             <p className="text-lg font-semibold">Your current army</p>

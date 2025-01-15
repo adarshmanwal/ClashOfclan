@@ -60,6 +60,7 @@ export default function TroopsContextProvider({ children }) {
     if (!firstElement) return list;
 
     if (firstElement.count > 1) {
+      addTrainedArmyList(firstElement);
       const updatedArmy = { ...firstElement, count: firstElement.count - 1 };
       return [updatedArmy, ...list.slice(1)];
     }
